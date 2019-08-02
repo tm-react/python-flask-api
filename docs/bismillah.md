@@ -62,10 +62,40 @@ setup(
 
 **For development the App Run Command**: python setup.py develop
 
-5. Create a app_config.py for store application configuration, such as **port**, **host**
+5. Create a app_config.py for store application configuration, such as **port**, **host** etc
 
 ```python
 # Flask settings
 FLASK_SERVER_NAME = 'localhost:8888'
 FLASK_DEBUG = True  # Do not use debug mode in production
+```
+
+
+6. Create a application.py for application startup.
+
+```python
+from flask import Flask, Blueprint
+from flask_api_basic import app_config
+
+
+app = Flask(__name__)
+
+
+def flask_configuration(flask_app):
+    flask_app.config['SERVER_NAME'] = app_config.FLASK_SERVER_NAME
+
+
+def init_configurations(flask_app):
+    flask_configuration(flask_app)
+
+
+def bismillah():
+    init_configurations(app)
+    app.run(debug=app_config.FLASK_DEBUG)
+
+
+
+
+if __name__ == "__main__":
+    bismillah()
 ```
