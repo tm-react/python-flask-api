@@ -74,8 +74,8 @@ FLASK_DEBUG = True  # Do not use debug mode in production
 6. Create a application.py for application startup.
 
 ```python
-from flask import Flask, Blueprint
-from flask_api_basic import app_config
+from flask import Flask
+form app_config import app_config
 
 
 app = Flask(__name__)

@@ -1,5 +1,5 @@
-from flask import Flask, Blueprint
-from flask_api_basic import app_config
+from flask import Flask
+import app_config
 
 
 app = Flask(__name__)
