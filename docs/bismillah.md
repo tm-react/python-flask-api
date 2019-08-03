@@ -70,12 +70,36 @@ FLASK_SERVER_NAME = 'localhost:8888'
 FLASK_DEBUG = True  # Do not use debug mode in production
 ```
 
+6. Create a example.py for example route.
 
-6. Create a application.py for application startup.
+```python
+from flask import Blueprint
+
+
+ex = Blueprint('example',__name__)
+
+@ex.route('/')
+def index():
+    return "Bismillah"
+```
+
+8. Create a url_mapping.py for add all route.
+
+```python
+import example
+
+def url_mappings(app):
+    app.register_blueprint(example.ex)
+    return app
+```
+
+
+9.  Create a application.py for application startup.
 
 ```python
 from flask import Flask
-form app_config import app_config
+import app_config
+import url_mapping
 
 
 app = Flask(__name__)
@@ -89,8 +113,10 @@ def init_configurations(flask_app):
     flask_configuration(flask_app)
 
 
+
 def bismillah():
-    init_configurations(app)
+    init_configurations(app)   
+    url_mapping.url_mappings(app)
     app.run(debug=app_config.FLASK_DEBUG)
 
 
